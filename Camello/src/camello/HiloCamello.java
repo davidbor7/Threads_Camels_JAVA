@@ -9,7 +9,7 @@ public class HiloCamello implements Runnable
 	int nombre;
 	boolean fin = false;
 	Camello camello_hiloCamello;
-	static int posicion_primera;
+	static int posicion_lider;
 	
 	int posiciones_avanzadas = 0;
 	int avance = 0;
@@ -30,37 +30,7 @@ public class HiloCamello implements Runnable
 		{
 			if(Principal_Camello.final_carrera == false)
 			{
-				avance = tirada_dados();	
-				camello_hiloCamello.avanzarCamello(avance);
-						
-				
-				System.out.println( "Camello número "+ nombre + " avanza " + avance + " y lleva " + camello_hiloCamello.damePosicionActual() + ".");
-
-				
-				if (camello_hiloCamello.damePosicionActual() >= posicion_primera) 
-				{
-					
-					posicion_primera = camello_hiloCamello.damePosicionActual();
-					
-				}
-				
-				if(posicion_primera >= Principal_Camello.distancia)
-				{
-					Principal_Camello.final_carrera = true;
-					System.out.println("FIN DE LA CARRERA");
-											
-				}	
-				
-				try 
-				{
-
-					Thread.sleep(1000);
-					
-				} catch (InterruptedException e) 
-				
-				{
-					e.printStackTrace();
-				}
+				mueve_camello();
 			}
 			else 
 			{
@@ -69,7 +39,48 @@ public class HiloCamello implements Runnable
 							
 		}
 	}
+	
 
+	public synchronized void mueve_camello()
+	{
+		
+		avance = tirada_dados();	
+		
+		camello_hiloCamello.avanzarCamello(avance);
+				
+		
+		System.out.println( "Camello número "+ nombre + " avanza " + avance + " y lleva " + camello_hiloCamello.damePosicionActual() + " posiciones. A " + (posicion_lider - posiciones_avanzadas) + " posiciones del líder");
+
+		
+		if (camello_hiloCamello.damePosicionActual() >= posicion_lider) 
+		{
+			
+			posicion_lider = camello_hiloCamello.damePosicionActual();
+			
+		}
+		
+		if(posicion_lider >= Principal_Camello.distancia)
+		{
+			Principal_Camello.final_carrera = true;
+			System.out.println("FIN DE LA CARRERA");
+			System.exit(0);
+									
+		}	
+		
+		try 
+		{
+
+			Thread.sleep(1000);
+			
+		} catch (InterruptedException e) 
+		
+		{
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	
 	public int tirada_dados() 
 	{
