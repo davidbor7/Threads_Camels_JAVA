@@ -2,17 +2,22 @@ package camello;
 
 import java.util.Random;
 
+import com.sun.media.sound.AlawCodec;
+
 
 public class HiloCamello implements Runnable
 {
 
 	int nombre;
 	boolean fin = false;
+	int posiciones_con_respecto_lider;
 	Camello camello_hiloCamello;
-	static int posicion_lider;
-	
 	int posiciones_avanzadas = 0;
 	int avance = 0;
+	
+	
+	
+	
 
 	public HiloCamello(int n, Camello c)
 	{
@@ -26,7 +31,7 @@ public class HiloCamello implements Runnable
 
 		
 
-		while(!fin)
+		while(fin == false)
 		{
 			if(Principal_Camello.final_carrera == false)
 			{
@@ -34,7 +39,7 @@ public class HiloCamello implements Runnable
 			}
 			else 
 			{
-				fin = false;
+				fin = true;
 			}
 							
 		}
@@ -46,26 +51,41 @@ public class HiloCamello implements Runnable
 		
 		avance = tirada_dados();	
 		
+		System.out.println(avance);
+		
+		
+		posiciones_avanzadas += avance;
+		
+		System.out.println("El avance total del camello" +nombre + "es:" + posiciones_avanzadas);
+		
+		
+/*
 		camello_hiloCamello.avanzarCamello(avance);
-				
 		
-		System.out.println( "Camello número "+ nombre + " avanza " + avance + " y lleva " + camello_hiloCamello.damePosicionActual() + " posiciones. A " + (posicion_lider - posiciones_avanzadas) + " posiciones del líder");
-
+		posiciones_con_respecto_lider = Principal_Camello.posicion_lider;
 		
-		if (camello_hiloCamello.damePosicionActual() >= posicion_lider) 
+		posiciones_con_respecto_lider -= posiciones_avanzadas;
+		
+		/*
+		if (camello_hiloCamello.damePosicionActual() >= Principal_Camello.posicion_lider) 
 		{
 			
-			posicion_lider = camello_hiloCamello.damePosicionActual();
+			Principal_Camello.posicion_lider = camello_hiloCamello.damePosicionActual();
 			
 		}
 		
-		if(posicion_lider >= Principal_Camello.distancia)
+		System.out.println( "Camello número "+ nombre + " avanza " + avance + " y lleva " + camello_hiloCamello.damePosicionActual() + " posiciones. A " + posiciones_con_respecto_lider + " posiciones del líder");
+		
+		
+		if(Principal_Camello.posicion_lider >= Principal_Camello.distancia)
 		{
 			Principal_Camello.final_carrera = true;
-			System.out.println("FIN DE LA CARRERA");
+			System.out.println("FIN DE LA CARRERA. Camello ganador: " + nombre);
 			System.exit(0);
 									
 		}	
+		*/
+		
 		
 		try 
 		{
@@ -77,12 +97,11 @@ public class HiloCamello implements Runnable
 		{
 			e.printStackTrace();
 		}
-		
-		
+				
 	}
 	
 	
-	public int tirada_dados() 
+	public synchronized int tirada_dados() 
 	{
 
 		int numeroAleatorio;
