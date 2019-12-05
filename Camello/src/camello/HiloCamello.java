@@ -52,14 +52,23 @@ public class HiloCamello implements Runnable
 		avance = tirada_dados();	
 		
 		System.out.println(avance);
-		
-		
+			
 		posiciones_avanzadas += avance;
 		
-		System.out.println("El avance total del camello" +nombre + "es:" + posiciones_avanzadas);
+		System.out.println("El avance total del camello " +nombre + "es: " + posiciones_avanzadas);
+		
+		if(Principal_Camello.posicion_lider < posiciones_avanzadas)
+		{
+			Principal_Camello.posicion_lider = posiciones_avanzadas;
+			System.out.println("La posición máxima es" + posiciones_avanzadas);
+		}
 		
 		
-/*
+		
+		
+		
+		
+		/*
 		camello_hiloCamello.avanzarCamello(avance);
 		
 		posiciones_con_respecto_lider = Principal_Camello.posicion_lider;
