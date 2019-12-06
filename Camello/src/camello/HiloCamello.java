@@ -2,8 +2,6 @@ package camello;
 
 import java.util.Random;
 
-import com.sun.media.sound.AlawCodec;
-
 
 public class HiloCamello implements Runnable
 {
@@ -63,24 +61,7 @@ public class HiloCamello implements Runnable
 				e.printStackTrace();
 			}			
 		}
-				
-		/*
-		camello_hiloCamello.avanzarCamello(avance);
-		
-		posiciones_con_respecto_lider = Principal_Camello.posicion_lider;
-		
-		posiciones_con_respecto_lider -= posiciones_avanzadas;
-		
-		/*
-		if (camello_hiloCamello.damePosicionActual() >= Principal_Camello.posicion_lider) 
-		{
-			
-			Principal_Camello.posicion_lider = camello_hiloCamello.damePosicionActual();
-			
-		}
-		
-		System.out.println( "Camello número "+ nombre + " avanza " + avance + " y lleva " + camello_hiloCamello.damePosicionActual() + " posiciones. A " + posiciones_con_respecto_lider + " posiciones del líder");			
-		*/				
+							
 		try 
 		{
 			Thread.sleep(3000);				
