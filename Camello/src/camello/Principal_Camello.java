@@ -10,7 +10,8 @@ public class Principal_Camello {
 	static boolean final_carrera = false; 
 	static int distancia = 0;
 	static int numero_camellos = 0;
-	static int posicion_lider;
+	
+	
 
 	public static void main(String[] args) throws IOException
 	{

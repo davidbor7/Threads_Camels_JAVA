@@ -35,7 +35,7 @@ public class Camello
 		return posicion_actual;
 	}
 
-	public void ponPosicionActual(int p )
+	public void ponPosicionActual(int p)
 	{
 		posicion_actual = p;
 	}

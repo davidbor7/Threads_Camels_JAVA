@@ -9,15 +9,13 @@ public class HiloCamello implements Runnable
 {
 
 	int nombre;
-	boolean fin = false;
+	boolean llave_ganador_ranking = false;
+	static boolean fin = false;
 	int posiciones_con_respecto_lider;
 	Camello camello_hiloCamello;
+	static int posicion_lider = 0;;
 	int posiciones_avanzadas = 0;
-	int avance = 0;
-	
-	
-	
-	
+	int avance = 0;		
 
 	public HiloCamello(int n, Camello c)
 	{
@@ -27,21 +25,16 @@ public class HiloCamello implements Runnable
 	}
 
 	@Override
-	public void run() {
-
-		
-
+	public void run() 
+	{
 		while(fin == false)
 		{
-			if(Principal_Camello.final_carrera == false)
-			{
-				mueve_camello();
-			}
-			else 
-			{
-				fin = true;
-			}
-							
+			mueve_camello();			
+		}
+				
+		if(fin && llave_ganador_ranking == false)
+		{
+			System.out.println("El Camello " + nombre + " a " + (Principal_Camello.distancia - camello_hiloCamello.damePosicionActual()) + " posiciones.");
 		}
 	}
 	
@@ -50,24 +43,27 @@ public class HiloCamello implements Runnable
 	{
 		
 		avance = tirada_dados();	
+		posiciones_avanzadas =  camello_hiloCamello.avanzarCamello(avance);
+		System.out.println( "Camello "+ nombre + " avanza " + avance + " y lleva " + camello_hiloCamello.damePosicionActual() + " posiciones.");
 		
-		System.out.println(avance);
+		if(camello_hiloCamello.damePosicionActual() >= Principal_Camello.distancia)
+		{					
+			fin = true;
+			llave_ganador_ranking = true;
 			
-		posiciones_avanzadas += avance;
-		
-		System.out.println("El avance total del camello " +nombre + "es: " + posiciones_avanzadas);
-		
-		if(Principal_Camello.posicion_lider < posiciones_avanzadas)
-		{
-			Principal_Camello.posicion_lider = posiciones_avanzadas;
-			System.out.println("La posición máxima es" + posiciones_avanzadas);
+			try //NOS ASEGURAMOS QUE SIEMPRE EL RANKING SALGA AL FINAL
+			{			
+				Thread.sleep(500);			
+				System.out.println("-----------FIN DE LA CARRERA-----------");		
+				System.out.println("***GANADOR DE LA CARRERA: CAMELLO " + nombre +" ***");
+				
+				
+			} catch (InterruptedException e) 
+			{
+				e.printStackTrace();
+			}			
 		}
-		
-		
-		
-		
-		
-		
+				
 		/*
 		camello_hiloCamello.avanzarCamello(avance);
 		
@@ -83,44 +79,25 @@ public class HiloCamello implements Runnable
 			
 		}
 		
-		System.out.println( "Camello número "+ nombre + " avanza " + avance + " y lleva " + camello_hiloCamello.damePosicionActual() + " posiciones. A " + posiciones_con_respecto_lider + " posiciones del líder");
-		
-		
-		if(Principal_Camello.posicion_lider >= Principal_Camello.distancia)
-		{
-			Principal_Camello.final_carrera = true;
-			System.out.println("FIN DE LA CARRERA. Camello ganador: " + nombre);
-			System.exit(0);
-									
-		}	
-		*/
-		
-		
+		System.out.println( "Camello número "+ nombre + " avanza " + avance + " y lleva " + camello_hiloCamello.damePosicionActual() + " posiciones. A " + posiciones_con_respecto_lider + " posiciones del líder");			
+		*/				
 		try 
 		{
-
-			Thread.sleep(1000);
+			Thread.sleep(3000);				
 			
 		} catch (InterruptedException e) 
 		
 		{
 			e.printStackTrace();
 		}
-				
 	}
-	
-	
+		
 	public synchronized int tirada_dados() 
 	{
-
 		int numeroAleatorio;
 		int avance = 0;
-
 		Random rd = new Random();
-
 		numeroAleatorio = rd.nextInt(100); //Numero entre el 0 y 99 ambos incluidos, en total 100 números
-
-
 		if (numeroAleatorio >= 0 && numeroAleatorio <= 29) 
 		{
 			avance = 0;
@@ -143,9 +120,7 @@ public class HiloCamello implements Runnable
 				}
 			}
 		}
-
 		return avance;
 	}
-
 }
 
