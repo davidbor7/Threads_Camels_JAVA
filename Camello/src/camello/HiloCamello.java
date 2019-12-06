@@ -17,7 +17,6 @@ public class HiloCamello implements Runnable
 	{
 		nombre = n;	
 		camello_hiloCamello = c;
-	
 	}
 
 	@Override
@@ -33,7 +32,6 @@ public class HiloCamello implements Runnable
 			System.out.println("El Camello " + nombre + " a " + (Principal_Camello.distancia - camello_hiloCamello.damePosicionActual()) + " posiciones.");
 		}
 	}
-
 
 	public synchronized void mueve_camello()
 	{
@@ -82,15 +80,16 @@ public class HiloCamello implements Runnable
 				mayor = posiciones_camellos[i];
 			}
 		}
+		
 		return mayor;
 	}
-
+	
 	public int tirada_dados() 
 	{
 		int numeroAleatorio;
 		int avance = 0;
 		Random rd = new Random();
-		numeroAleatorio = rd.nextInt(100); //Numero entre el 0 y 99 ambos incluidos, en total 100 números
+		numeroAleatorio = rd.nextInt(100); //Número entre el 0 y 99 ambos incluidos, en total 100 números
 		if (numeroAleatorio >= 0 && numeroAleatorio <= 29) 
 		{
 			avance = 0;
@@ -115,5 +114,4 @@ public class HiloCamello implements Runnable
 		}
 		return avance;
 	}
-
 }
