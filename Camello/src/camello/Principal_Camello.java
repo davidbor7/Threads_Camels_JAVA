@@ -7,12 +7,11 @@ import java.io.InputStreamReader;
 
 public class Principal_Camello {
 
-	static boolean final_carrera = false; 
-	static int distancia = 0;
-	static int numero_camellos = 0;
+	public static boolean final_carrera = false; 
+	public static int distancia = 0;
+	private static int numero_camellos = 0;
 	
 	
-
 	public static void main(String[] args) throws IOException
 	{
 

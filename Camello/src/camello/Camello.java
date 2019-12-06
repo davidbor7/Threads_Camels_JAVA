@@ -4,8 +4,8 @@ package camello;
 public class Camello
 {
 
-	int nombre;
-	int posicion_actual;
+	private int nombre;
+	private int posicion_actual;
 
 	public Camello()
 	{
